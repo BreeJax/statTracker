@@ -1,0 +1,25 @@
+npm install sequelize pg --save
+
+sequelize init
+
+createdb statTracker
+
+sequelize db:migrate
+
+sequelize model:create --name Users --attributes 'name:STRING  username:STRING passwordHash:STRING'
+
+sequelize db:migrate
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+sequelize db:migrate
+
+sequelize model:create --name Activities --attributes 'activityName:STRING'
+
+sequelize db:migrate
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+sequelize db:migrate
+
+sequelize model:create --name userActivity --attributes 'activityId:INTEGER userId:INTEGER howMany:DECIMAL doneOn:DATE'
+
+sequelize db:migrate
