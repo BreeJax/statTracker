@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Stat Tracker
+  h3 Please Login to see your personal Stat Tracker
+  form(action='/login', method='post')
+    input(type='text', placeholder='User Name', name='username', required='')
+    input(type='text', placeholder='Password', name='password', required='')
+    button(type='submit', name='userLogin') Login
+  h3 Don't have an account? Create one now
+  form(action='/userLogin/register', method='post')
+    input(type='text', placeholder='User Name', name='username', required='')
+    input(type='text', placeholder='Password', name='password', required='')
+    button(type='submit', name='userLogin') Login
+
+  
