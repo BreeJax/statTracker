@@ -26,7 +26,7 @@ var server = http.createServer(app)
  */
 
 server.listen(port, () => {
-  console.log("Here we go.")
+  console.log("Off to NeverLand!")
 })
 server.on("error", onError)
 server.on("listening", onListening)

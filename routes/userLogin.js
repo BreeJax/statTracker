@@ -26,7 +26,6 @@ passport.use(
   "signup",
   new LocalStrategy((username, password, next) => {
     let data = {
-      name: name,
       username: username,
       password: password
     }

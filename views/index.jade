@@ -3,7 +3,7 @@ extends layout
 block content
   h1 Stat Tracker
   h3 Please Login to see your personal Stat Tracker
-  form(action='/login', method='post')
+  form(action='/userLogin/login', method='post')
     input(type='text', placeholder='User Name', name='username', required='')
     input(type='text', placeholder='Password', name='password', required='')
     button(type='submit', name='userLogin') Login
@@ -12,6 +12,13 @@ block content
     input(type='text', placeholder='Your Name', name='name', required='')
     input(type='text', placeholder='User Name', name='username', required='')
     input(type='text', placeholder='Password', name='password', required='')
-    button(type='submit', name='userLogin') Login
+    button(type='submit', name='userLogin') Register
 
+
+  h4 Make a new activity
+  form(action='/activityLog/add', method='post')
+    input(type='text', placeholder='Activity Name', name='activityName', required='')
+    button(type='submit') Add Activity
+
+  
   

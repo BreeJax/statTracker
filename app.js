@@ -11,6 +11,8 @@ const bcrypt = require("bcryptjs")
 
 var index = require("./routes/index")
 var userLogin = require("./routes/userLogin")
+var restricted = require("./routes/restricted")
+var activityLog = require("./routes/activityLog")
 
 const app = express()
 
@@ -37,6 +39,8 @@ app.use(express.static(path.join(__dirname, "public")))
 
 app.use("/", index)
 app.use("/userLogin", userLogin)
+app.use("/restricted", restricted)
+app.use("/activityLog", activityLog)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
