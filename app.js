@@ -7,7 +7,6 @@ const bodyParser = require("body-parser")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const expressSession = require("express-session")
-const bcrypt = require("bcryptjs")
 
 var index = require("./routes/index")
 var userLogin = require("./routes/userLogin")
@@ -37,9 +36,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
+const checkIfLoggedIn = (req, res, next) => {
+  if (req.user) {
+    res.redirect("/")
+  } else {
+    next()
+  }
+}
+
 app.use("/", index)
 app.use("/userLogin", userLogin)
-app.use("/restricted", restricted)
+app.use("/restricted", checkIfLoggedIn, restricted)
 app.use("/activityLog", activityLog)
 
 // catch 404 and forward to error handler

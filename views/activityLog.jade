@@ -1,4 +1,6 @@
 extends layout
 
 block content
-  h1 Stat Tracker
+  h1 activityLog
+  each activity in activities
+            p= activity.activityName

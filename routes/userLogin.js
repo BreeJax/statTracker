@@ -3,6 +3,7 @@ const userLogin = express.Router()
 const models = require("../models")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
+const bcrypt = require("bcryptjs")
 
 /* GET users listing. */
 passport.use(
@@ -24,10 +25,12 @@ passport.use(
 )
 passport.use(
   "signup",
-  new LocalStrategy((username, password, next) => {
+  new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
+    console.log({ req, username, password, next })
     let data = {
       username: username,
-      password: password
+      password: password,
+      name: req.body.name
     }
     // create a user
     models.Users
@@ -44,7 +47,7 @@ passport.serializeUser((user, next) => {
   next(null, user.id)
 })
 passport.deserializeUser(function(id, next) {
-  models.User
+  models.Users
     .findOne({
       where: {
         id: id
@@ -61,7 +64,7 @@ userLogin.get("/", (req, res) => {
   res.send("respond with a resource")
 })
 userLogin.post(
-  "/",
+  "/login",
   passport.authenticate("login", {
     successRedirect: "/restricted",
     failureRedirect: "/"
