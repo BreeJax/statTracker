@@ -10,7 +10,7 @@ activityLog.post("/add", (req, res) => {
   newActivity
     .save()
     .then(databaseStatTracker => {
-      res.redirect("/")
+      res.redirect("/restricted/loggedIn")
     })
     .catch(err => {
       console.log(err)
@@ -21,7 +21,6 @@ activityLog.get("/list", (req, res) => {
   models.Activities
     .findAll({})
     .then(activities => {
-      console.log(activities)
       res.render("activityLog", { activities })
     })
     .catch(err => {

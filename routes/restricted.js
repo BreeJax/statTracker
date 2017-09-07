@@ -2,16 +2,17 @@ const express = require("express")
 const restricted = express.Router()
 const models = require("../models")
 
-const checkIfLoggedIn = (req, res, next) => {
-  if (req.user) {
-    res.redirect("/")
-  } else {
-    next()
-  }
-}
-
-restricted.get("/", checkIfLoggedIn, function(req, res, next) {
-  res.render("restricted")
+restricted.get("/loggedIn", (req, res) => {
+  models.Activities
+    .findAll({})
+    .then(activities => {
+      // modules.Users.findOne({})
+      console.log(req.user)
+      res.render("restricted", { activities, user: req.user })
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 module.exports = restricted

@@ -4,14 +4,8 @@ const favicon = require("serve-favicon")
 const logger = require("morgan")
 const cookieParser = require("cookie-parser")
 const bodyParser = require("body-parser")
-const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const expressSession = require("express-session")
-
-var index = require("./routes/index")
-var userLogin = require("./routes/userLogin")
-var restricted = require("./routes/restricted")
-var activityLog = require("./routes/activityLog")
 
 const app = express()
 
@@ -23,6 +17,11 @@ app.use(
     saveUninitialized: false
   })
 )
+
+var index = require("./routes/index")
+var userLogin = require("./routes/userLogin")(app)
+var restricted = require("./routes/restricted")
+var activityLog = require("./routes/activityLog")
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
@@ -37,7 +36,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
 const checkIfLoggedIn = (req, res, next) => {
-  if (req.user) {
+  if (!req.user) {
     res.redirect("/")
   } else {
     next()

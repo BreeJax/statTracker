@@ -13,7 +13,7 @@ passport.use(
       .findOne({ where: { username } })
       .then(user => {
         if (bcrypt.compareSync(password, user.passwordHash)) {
-          return next(null, { username: user.username, id: user.id })
+          return next(null, { name: user.name, username: user.username, id: user.id })
         } else {
           return next(null, false, { message: "Noooooope" })
         }
@@ -38,7 +38,7 @@ passport.use(
       .save()
       .then(user => {
         // save to database
-        return next(null, user)
+        return next(null, { name: user.name, username: user.username, id: user.id })
       })
       .catch(err => next(err))
   })
@@ -54,33 +54,36 @@ passport.deserializeUser(function(id, next) {
       }
     })
     .then(user => {
-      next(null, { username: user.username, id: user.id })
+      next(null, { name: user.name, username: user.username, id: user.id })
     })
 })
-userLogin.use(passport.initialize())
-userLogin.use(passport.session())
 
-userLogin.get("/", (req, res) => {
-  res.send("respond with a resource")
-})
-userLogin.post(
-  "/login",
-  passport.authenticate("login", {
-    successRedirect: "/restricted",
-    failureRedirect: "/"
-  })
-)
-userLogin.post(
-  "/register",
-  passport.authenticate("signup", {
-    successRedirect: "/restricted",
-    failureRedirect: "/"
-  })
-)
-userLogin.get("/logout", (req, res) => {
-  req.session.destroy()
-  req.logOut()
-  res.redirect("/")
-})
+module.exports = function(app) {
+  app.use(passport.initialize())
+  app.use(passport.session())
 
-module.exports = userLogin
+  userLogin.get("/", (req, res) => {
+    res.send("respond with a resource")
+  })
+  userLogin.post(
+    "/login",
+    passport.authenticate("login", {
+      successRedirect: "/restricted/loggedIn",
+      failureRedirect: "/"
+    })
+  )
+  userLogin.post(
+    "/register",
+    passport.authenticate("signup", {
+      successRedirect: "/restricted/loggedIn",
+      failureRedirect: "/"
+    })
+  )
+  userLogin.get("/logout", (req, res) => {
+    req.session.destroy()
+    req.logOut()
+    res.redirect("/")
+  })
+
+  return userLogin
+}

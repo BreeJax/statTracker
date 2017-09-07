@@ -1,5 +1,12 @@
 extends layout
 
 block content
-//- {this in interprilation}
-h1 Welcome #{username}
+  h1 Welcome #{user.name}
+  each activity in activities
+            a(href="#", target="_blank") 
+              p= activity.activityName
+
+  h4 Make a new activity
+  form(action='/activityLog/add', method='post')
+    input(type='text', placeholder='Activity Name', name='activityName', required='')
+    button(type='submit') Add Activity
