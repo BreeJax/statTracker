@@ -3,10 +3,13 @@ extends layout
 block content
   h1 Welcome #{user.name}
   each activity in activities
-            a(href="#", target="_blank") 
+            a(href="/restricted/userActivities/#{activity.id}", target="_blank") 
               p= activity.activityName
 
   h4 Make a new activity
   form(action='/activityLog/add', method='post')
     input(type='text', placeholder='Activity Name', name='activityName', required='')
     button(type='submit') Add Activity
+    
+  h3
+    a(href="/userLogin/logout", target="_blank") logout

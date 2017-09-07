@@ -7,12 +7,18 @@ restricted.get("/loggedIn", (req, res) => {
     .findAll({})
     .then(activities => {
       // modules.Users.findOne({})
-      console.log(req.user)
       res.render("restricted", { activities, user: req.user })
     })
     .catch(err => {
       console.log(err)
     })
+})
+
+restricted.get("/userActivities/:activity.id", (req, res) => {
+  const requestId = req.params.activity.id
+  models.userActivity.findAll({ activityId: requestID }).then(activities => {
+    res.render("userActivities", { activities })
+  })
 })
 
 module.exports = restricted
