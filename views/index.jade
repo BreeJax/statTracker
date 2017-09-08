@@ -1,21 +1,21 @@
 extends layout
 
 block content
-  h3 Please Login to see your personal Stat Tracker
-  form(action='/userLogin/login', method='post')
-    input(type='text', placeholder='User Name', name='username', required='')
-    input(type='text', placeholder='Password', name='password', required='')
-    button(type='submit') Login
-  h3 Don't have an account? Create one now
-  form(action='/userLogin/register', method='post')
-    input(type='text', placeholder='Your Name', name='name', required='')
-    input(type='text', placeholder='User Name', name='username', required='')
-    input(type='text', placeholder='Password', name='password', required='')
-    button(type='submit') Register
-  //- h6 test test
-  //- p we have #{Activities.activityName}
-
-  a(href='/activityLog/list') See all of the Actvities
+  .loginpage
+    h1 Stat Tracker
+    h3 Please Login to see your personal Stat Tracker
+    form(action='/userLogin/login', method='post')
+      input(type='text', placeholder='User Name', name='username', required='')
+      input(type='text', placeholder='Password', name='password', required='')
+      button(type='submit') Login
+    h3 Don't have an account? Create one now
+    form(action='/userLogin/register', method='post')
+      input(type='text', placeholder='Your Name', name='name', required='')
+      input(type='text', placeholder='User Name', name='username', required='')
+      input(type='text', placeholder='Password', name='password', required='')
+      button(type='submit') Register
+      
+    a(href='/activityLog/list') See all of the Actvities
 
   
   

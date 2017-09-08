@@ -1,10 +1,10 @@
 extends layout
 
 block content
-  h1 Welcome #{user.name}
+  h1 Welcome to your Stat Tracker, #{user.name}!
   each activity in activities
-            a(href="/restricted/userActivities/#{activity.id}", target="_blank") 
-              p= activity.activityName
+      a(href="/restricted/userActivities/#{activity.id}", target="_blank") 
+        p= activity.activityName
 
   h4 Make a new activity
   form(action='/activityLog/add', method='post')
@@ -12,4 +12,4 @@ block content
     button(type='submit') Add Activity
     
   h3
-    a(href="/userLogin/logout", target="_blank") logout
+    a(href="/userLogin/logout") logout
