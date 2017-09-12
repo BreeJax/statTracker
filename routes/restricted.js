@@ -16,11 +16,10 @@ restricted.get("/loggedIn", (req, res) => {
 
 restricted.get("/userActivities/:activityId", (req, res) => {
   const activityId = req.params.activityId
-  const userId = req.user
+  const userId = req.session.passport.user
   models.userActivity
     .findAll({ where: { activityId: activityId, userId: userId } })
     .then(activities => {
-      console.log(activities)
       res.render("userActivities", { activities, user: req.user })
     })
     .catch(err => {
