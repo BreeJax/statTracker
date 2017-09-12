@@ -16,10 +16,9 @@ restricted.get("/loggedIn", (req, res) => {
 
 restricted.get("/userActivities/:activityId", (req, res) => {
   const activityId = req.params.activityId
-  const userId = req.sessions.user
-  console.log(activityId + userId + "these are the droids you are looking for")
+  const userId = req.user
   models.userActivity
-    .findAll({ where: { activityId: activityId } })
+    .findAll({ where: { activityId: activityId, userId: userId } })
     .then(activities => {
       console.log(activities)
       res.render("userActivities", { activities, user: req.user })
