@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  h1 Welcome to your Stat Tracker, #{user.name}!
+  h1 #{user.name}, welcome to your Stat Tracker!
   each activity in activities
-      a(href="/restricted/userActivities/#{activity.id}", target="_blank") 
+      a(href="/restricted/userActivities/" + activity.id, target="_blank") 
         p= activity.activityName
 
   h4 Make a new activity

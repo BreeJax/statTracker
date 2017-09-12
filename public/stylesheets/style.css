@@ -2,9 +2,9 @@ body {
   padding: 3em;
   font: 1em "Lucida Grande", Helvetica, Arial, sans-serif;
   /*background-color: lightgray;*/
-  background-image: url("https://media.giphy.com/media/qUdjw34AA7EKQ/giphy.gif");
-  display: flex;
-  justify-content: center;
+  /*background-image: url("https://media.giphy.com/media/qUdjw34AA7EKQ/giphy.gif");*/
+  /*display: flex;*/
+  /*justify-content: center;*/
 }
 .loginpage {
   background-color: lightgray;

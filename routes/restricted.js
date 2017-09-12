@@ -14,11 +14,19 @@ restricted.get("/loggedIn", (req, res) => {
     })
 })
 
-restricted.get("/userActivities/:activity.id", (req, res) => {
-  const requestId = req.params.activity.id
-  models.userActivity.findAll({ activityId: requestID }).then(activities => {
-    res.render("userActivities", { activities })
-  })
+restricted.get("/userActivities/:activityId", (req, res) => {
+  const activityId = req.params.activityId
+  const userId = req.sessions.user
+  console.log(activityId + userId + "these are the droids you are looking for")
+  models.userActivity
+    .findAll({ where: { activityId: activityId } })
+    .then(activities => {
+      console.log(activities)
+      res.render("userActivities", { activities, user: req.user })
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 module.exports = restricted
