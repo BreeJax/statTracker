@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 testing #{user.name}
-  h2 
+  //- h2 test2 #{activity.activityName}
 
   table
     thead
@@ -11,5 +11,6 @@ block content
         td When you did it
     tbody
       tr
-        td #{howMany}
-        td #{doneOn}
+      each howMany in userActivity
+        td=  userActivity.howMany
+        //- td= userActivity.doneOn

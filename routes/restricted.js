@@ -19,8 +19,29 @@ restricted.get("/userActivities/:activityId", (req, res) => {
   const userId = req.session.passport.user
   models.userActivity
     .findAll({ where: { activityId: activityId, userId: userId } })
-    .then(activities => {
-      res.render("userActivities", { activities, user: req.user })
+    .then(userActivities => {
+      console.log(userActivities)
+      res.render("userActivities", { userActivities, user: req.user })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+restricted.post("/userActivities/:activityId/new", (req, res) => {
+  const activityId = req.params.activityId
+  const userId = req.session.passport.user
+  const newActivity = models.userActivity.build({
+    activityId: activityId,
+    userId: userId,
+    howMany: req.body.howMany,
+    doneOn: req.body.doneOn
+  })
+
+  newActivity
+    .save()
+    .then(databaseUserActivities => {
+      res.render("userActivities")
     })
     .catch(err => {
       console.log(err)
