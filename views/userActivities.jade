@@ -4,13 +4,5 @@ block content
   h1 testing #{user.name}
   //- h2 test2 #{activity.activityName}
 
-  table
-    thead
-      tr
-        td How long you did it for
-        td When you did it
-    tbody
-      tr
-      each howMany in userActivity
-        td=  userActivity.howMany
-        //- td= userActivity.doneOn
+  .test
+    - for (let i = 0; i < userActivity.length; i++)

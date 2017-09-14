@@ -47,5 +47,18 @@ restricted.post("/userActivities/:activityId/new", (req, res) => {
       console.log(err)
     })
 })
+restricted.get("/deleteAccount", (req, res) => {
+  const userId = req.session.passport.user
+  models.Users
+    .destroy({ where: { id: userId } })
+    .then(databaseUsers => {
+      req.session.destroy()
+      req.logOut()
+      res.redirect("/")
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
 
 module.exports = restricted
