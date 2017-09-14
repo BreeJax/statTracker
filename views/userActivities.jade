@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 testing #{user.name}
-  //- h2 test2 #{activity.activityName}
-
-  .test
-    - for (let i = 0; i < userActivity.length; i++)
+  form(action='/restricted/userActivities/add', method='post')
+    input(type='text', placeholder='How long did you do it for?', name='howMany', required='')
+    input(type='text', placeholder='When did you do it?', name='doneOn', required='')
+    button(type='submit') Add Activity Event

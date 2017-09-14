@@ -26,7 +26,6 @@ passport.use(
 passport.use(
   "signup",
   new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
-    console.log({ req, username, password, next })
     let data = {
       username: username,
       password: password,
