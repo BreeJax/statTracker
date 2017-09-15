@@ -33,7 +33,7 @@ restricted.get("/userActivities/:activityId", (req, res) => {
 })
 
 restricted.post("/userActivities/add", (req, res) => {
-  const activityId = req.params.activityId
+  const activityId = req.body.activityId
   const userId = req.session.passport.user
   console.log(activityId)
   const newActivity = models.userActivity.build({
@@ -42,16 +42,18 @@ restricted.post("/userActivities/add", (req, res) => {
     howMany: req.body.howMany,
     doneOn: req.body.doneOn
   })
-
+  console.log(newActivity)
   newActivity
     .save()
     .then(databaseUserActivities => {
-      res.redirect("userActivities")
+      res.redirect(activityId)
     })
     .catch(err => {
       console.log(err)
+      res.json(err)
     })
 })
+
 restricted.get("/deleteAccount", (req, res) => {
   const userId = req.session.passport.user
   models.Users

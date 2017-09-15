@@ -12,9 +12,13 @@ passport.use(
     models.Users
       .findOne({ where: { username } })
       .then(user => {
+        if (!user) {
+          return next({ error: "user not found" })
+        }
         if (bcrypt.compareSync(password, user.passwordHash)) {
           return next(null, { name: user.name, username: user.username, id: user.id })
         } else {
+          // user found, but bad password
           return next(null, false, { message: "Noooooope" })
         }
       })
