@@ -1,7 +1,9 @@
 extends layout
 
 block content
-  h1 testing #{user.name}
+  h1 #{activity.activityName} for  #{user.name}
+  - for (let i = 0; i < userActivities.length; i++)
+    p= userActivities[i].howMany
   form(action='/restricted/userActivities/add', method='post')
     input(type='text', placeholder='How long did you do it for?', name='howMany', required='')
     input(type='text', placeholder='When did you do it?', name='doneOn', required='')

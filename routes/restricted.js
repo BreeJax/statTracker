@@ -18,15 +18,18 @@ restricted.get("/userActivities/:activityId", (req, res) => {
   const activityId = req.params.activityId
   const userId = req.session.passport.user
 
-  const activityName = models.Activities.findOne({ where: { id: activityId } })
-  models.userActivity
-    .findAll({ where: { activityId: activityId, userId: userId } })
-    .then(userActivities => {
-      res.render("userActivities", { userActivities, user: req.user, activityName })
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  models.Activities.findOne({ where: { id: activityId } }).then(activity => {
+    console.log("activity name", activity)
+    models.userActivity
+      .findAll({ where: { activityId: activityId, userId: userId } })
+      .then(userActivities => {
+        const data = { userActivities, user: req.user, activity }
+        res.render("userActivities", data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
 })
 
 restricted.post("/userActivities/add", (req, res) => {
