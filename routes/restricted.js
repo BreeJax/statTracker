@@ -19,16 +19,25 @@ restricted.get("/userActivities/:activityId", (req, res) => {
   const userId = req.session.passport.user
 
   models.Activities.findOne({ where: { id: activityId } }).then(activity => {
-    console.log("activity name", activity)
     models.userActivity
       .findAll({ where: { activityId: activityId, userId: userId } })
       .then(userActivities => {
+        console.log(userActivities)
         const data = { userActivities, user: req.user, activity }
         res.render("userActivities", data)
       })
       .catch(err => {
         console.log(err)
       })
+  })
+})
+
+restricted.get("/userActivities/edit/:userActivityId", (req, res) => {
+  const id = req.params.userActivityId
+
+  models.userActivity.findOne({ where: { id: id } }).then(editThis => {
+    console.log(editThis)
+    res.render("edit", { editThis })
   })
 })
 

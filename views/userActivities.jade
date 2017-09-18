@@ -7,6 +7,10 @@ block content
       span= userActivities[i].howMany
       span &nbsp;on&nbsp;
       span= userActivities[i].doneOn
+      a(href="/restricted/userActivities/edit/" + userActivities[i].id, target="_blank") 
+        p Edit Event
+
+
   form(action='/restricted/userActivities/add', method='post')
     input(type='text', placeholder='How long did you do it for?', name='howMany', required='')
     input(type='date', placeholder='When did you do it?', name='doneOn', required='')

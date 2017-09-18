@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 Edit this Event
+  - for (let i = 0; i < editThis.length; i++)
+
+    form(action='/restricted/userActivities/edit', method='post')
+      input(type='text',  value= editThis[i].howMany , required='')
+      input(type='date', value= editThis[i].doneOn, required='')
+      input(type='hidden', value= editThis.id, name='id')
+      button(type='submit') Add Activity Event
