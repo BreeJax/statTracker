@@ -22,7 +22,6 @@ restricted.get("/userActivities/:activityId", (req, res) => {
     models.userActivity
       .findAll({ where: { activityId: activityId, userId: userId } })
       .then(userActivities => {
-        console.log(userActivities)
         const data = { userActivities, user: req.user, activity }
         res.render("userActivities", data)
       })
@@ -32,12 +31,16 @@ restricted.get("/userActivities/:activityId", (req, res) => {
   })
 })
 
+//in activity done find all where userid = session id
+//then
+//find all where activities
+
 restricted.get("/userActivities/edit/:userActivityId", (req, res) => {
   const id = req.params.userActivityId
 
-  models.userActivity.findOne({ where: { id: id } }).then(editThis => {
-    console.log(editThis)
-    res.render("edit", { editThis })
+  models.userActivity.findOne({ where: { id: id } }).then(userActivity => {
+    console.log(userActivity)
+    res.render("edit", { userActivity })
   })
 })
 
@@ -51,7 +54,6 @@ restricted.post("/userActivities/add", (req, res) => {
     howMany: req.body.howMany,
     doneOn: req.body.doneOn
   })
-  console.log(newActivity)
   newActivity
     .save()
     .then(databaseUserActivities => {
