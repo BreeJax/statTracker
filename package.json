@@ -20,5 +20,18 @@
     "pg": "^7.2.0",
     "sequelize": "^4.8.0",
     "serve-favicon": "~2.4.2"
-  }
+  },
+  "description": "a stat tracker to keep up with exercise or whatever else you might want to keep track of.",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BreeJax/statTracker.git"
+  },
+  "author": "Bree Jackson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BreeJax/statTracker/issues"
+  },
+  "homepage": "https://github.com/BreeJax/statTracker#readme"
 }
